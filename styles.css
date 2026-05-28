@@ -1051,23 +1051,37 @@ a {
   gap: 12px;
   max-width: min(360px, calc(100vw - 32px));
   padding: 10px 16px 10px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(118, 229, 198, 0.35);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 22px 48px rgba(17, 26, 47, 0.16);
-  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(12, 91, 158, 0.98), rgba(11, 172, 150, 0.96));
+  box-shadow: 0 22px 48px rgba(10, 75, 128, 0.28);
+  color: #ffffff;
   cursor: pointer;
   font: inherit;
   text-align: left;
   backdrop-filter: blur(16px);
-  animation: nudgeIn 700ms cubic-bezier(0.22, 1, 0.36, 1) 1200ms both,
-    nudgePulse 2400ms ease-in-out 2600ms infinite;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 18px, 0) scale(0.96);
+}
+
+.agent-nudge.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+  animation: nudgeIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    nudgePulse 2400ms ease-in-out 1400ms infinite;
 }
 
 .agent-nudge:hover,
 .agent-nudge:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 28px 58px rgba(17, 26, 47, 0.2);
+  box-shadow: 0 28px 58px rgba(10, 75, 128, 0.34);
+}
+
+.agent-nudge.is-dismissed {
+  display: none;
 }
 
 .agent-nudge-photo {
@@ -1078,6 +1092,24 @@ a {
   object-fit: cover;
   object-position: 50% 30%;
   box-shadow: 0 10px 22px rgba(255, 145, 39, 0.22);
+}
+
+.agent-nudge-badge {
+  position: absolute;
+  top: -4px;
+  left: 48px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.96);
+  border-radius: 50%;
+  background: #20c997;
+  color: #fff;
+  font-family: "Sora", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  box-shadow: 0 10px 18px rgba(32, 201, 151, 0.28);
 }
 
 .agent-nudge-copy {
@@ -1092,15 +1124,16 @@ a {
 }
 
 .agent-nudge-copy span {
-  color: rgba(17, 26, 47, 0.68);
+  color: rgba(255, 255, 255, 0.88);
   font-size: 0.92rem;
   font-weight: 600;
 }
 
-body:not(.agent-widget-visible) chat-widget,
-body:not(.agent-widget-visible) div[data-chat-widget],
-body:not(.agent-widget-visible) iframe[src*="leadconnector"],
-body:not(.agent-widget-visible) iframe[src*="chat-widget"] {
+body:not(.agent-widget-open) chat-widget,
+body:not(.agent-widget-open) div[data-chat-widget],
+body:not(.agent-widget-open) [data-chat-widget],
+body:not(.agent-widget-open) iframe[src*="leadconnector"],
+body:not(.agent-widget-open) iframe[src*="chat-widget"] {
   opacity: 0 !important;
   pointer-events: none !important;
 }
@@ -1331,6 +1364,10 @@ body:not(.agent-widget-visible) iframe[src*="chat-widget"] {
     width: 48px;
     height: 48px;
     flex-basis: 48px;
+  }
+
+  .agent-nudge-badge {
+    left: 42px;
   }
 }
 
