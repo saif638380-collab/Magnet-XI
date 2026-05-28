@@ -1097,6 +1097,14 @@ a {
   font-weight: 600;
 }
 
+body:not(.agent-widget-visible) chat-widget,
+body:not(.agent-widget-visible) div[data-chat-widget],
+body:not(.agent-widget-visible) iframe[src*="leadconnector"],
+body:not(.agent-widget-visible) iframe[src*="chat-widget"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @keyframes nudgeIn {
   from {
     opacity: 0;

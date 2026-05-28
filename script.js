@@ -103,6 +103,7 @@ function triggerAgentLoad() {
 }
 
 function openAgentWithRetry() {
+  document.body.classList.add("agent-widget-visible");
   triggerAgentLoad();
 
   let attempts = 0;
