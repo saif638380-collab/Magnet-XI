@@ -1041,6 +1041,85 @@ a {
   font-size: 0.95rem;
 }
 
+.agent-nudge {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 10px 16px 10px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 22px 48px rgba(17, 26, 47, 0.16);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  animation: nudgeIn 700ms cubic-bezier(0.22, 1, 0.36, 1) 1200ms both,
+    nudgePulse 2400ms ease-in-out 2600ms infinite;
+}
+
+.agent-nudge:hover,
+.agent-nudge:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 28px 58px rgba(17, 26, 47, 0.2);
+}
+
+.agent-nudge-photo {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  box-shadow: 0 10px 22px rgba(255, 145, 39, 0.22);
+}
+
+.agent-nudge-copy {
+  display: grid;
+  gap: 2px;
+  line-height: 1.2;
+}
+
+.agent-nudge-copy strong {
+  font-family: "Sora", sans-serif;
+  font-size: 0.98rem;
+}
+
+.agent-nudge-copy span {
+  color: rgba(17, 26, 47, 0.68);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+@keyframes nudgeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes nudgePulse {
+  0%,
+  100% {
+    box-shadow: 0 22px 48px rgba(17, 26, 47, 0.16);
+  }
+
+  50% {
+    box-shadow: 0 24px 54px rgba(255, 145, 39, 0.25);
+  }
+}
+
 @media (max-width: 980px) {
   .navbar {
     padding: 16px 18px;
@@ -1233,14 +1312,28 @@ a {
     grid-template-columns: 1fr;
     gap: 22px;
   }
+
+  .agent-nudge {
+    right: 12px;
+    bottom: 12px;
+    padding-right: 14px;
+  }
+
+  .agent-nudge-photo {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .reveal.is-visible {
+  .reveal.is-visible,
+  .agent-nudge {
     opacity: 1;
     transform: none;
     filter: none;
     transition: none;
+    animation: none;
   }
 }
